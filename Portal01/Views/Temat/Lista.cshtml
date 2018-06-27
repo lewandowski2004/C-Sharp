@@ -1,0 +1,40 @@
+﻿@model PagedList.IPagedList<ForumIT.ViewModels.Lista>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Materiały";
+}
+<h2>Tematy</h2>
+<hr />
+@foreach (var item in Model)
+{
+
+    <div class="media">
+        
+        <div class="media-left" style="padding-right: 30px">
+            <img class="media-object img-circle"
+                 src="~/Graphics/Users/@((item.Foto!=null)?@item.Foto:"user.png")"
+                 alt="zdjęcie"
+                 width="64">
+            <h6><b>@item.Autor</b></h6>
+        </div>
+        <div class="media-body" >
+            @Html.ActionLink("Czytaj więcej", "Details", new { id = item.IdTematu }, new { @class = "btn btn-info btn-xs pull-right" })
+            <h4 class="media-heading">
+                <a title="Czytaj" href="@Url.Action("Details", "Temat", new { id = item.IdTematu })">
+                    <h1 style="margin-top: 0px">@item.Tytul</h1>
+                </a>
+            </h4>
+            <p style="max-width: 600px; max-height: 95px">@item.Tresc</p>
+            
+        </div>
+    </div>
+    <hr />
+       
+
+}
+<div class="row">
+    Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+    <div class="pull-right">
+        @Html.PagedListPager(Model, Page => Url.Action("Lista", new { strona = Page }))
+    </div>
+</div>

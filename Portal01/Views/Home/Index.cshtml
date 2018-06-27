@@ -1,0 +1,79 @@
+﻿@model ForumIT.Models.Multipledate
+@using ForumIT;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Materiały";
+}
+
+<div class="jumbotron">
+    <h1>Forum Dyskusyjne IT</h1><br />
+    <p class="lead">Forum poświęcone jest szeroko rozwiniętej dziedzinie informatyki. Przedstaw swój problem w temacie i przedyskutuj go z dużym gronem użytkowników służących pomocą</p>
+</div><br /><br />
+<div class="row">
+
+
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Tematy</h3></div>
+        </div>
+        <div class=" panel panel-default" style="padding: 10px">
+
+
+
+            <hr />
+            @foreach (var item in Model.listaa)
+            {
+
+                <div class="media">
+
+                    <div class="media-left" style="padding-right: 30px">
+                        <img class="media-object img-circle"
+                             src="~/Graphics/Users/@((item.Foto!=null)?@item.Foto:"user.png")"
+                             alt="zdjęcie"
+                             width="64">
+                        <h6><b>@item.Autor</b></h6>
+                    </div>
+                    <div class="media-body">
+
+                        <h4 class="media-heading">
+                            <a title="Czytaj" href="@Url.Action("Details", "Temat", new { id = item.IdTematu })">
+                                <h1 style="margin-top: 0px">@item.Tytul</h1>
+                            </a>
+                        </h4>
+                        <p style="max-width: 600px; max-height: 95px">@item.Tresc</p>
+
+                    </div>
+                </div>
+                <hr />
+
+
+            }
+        </div>
+        <div class="row">
+            Strona @(Model.listaa.PageCount < Model.listaa.PageNumber ? 0 : Model.listaa.PageNumber) z @Model.listaa.PageCount
+            <div class="pull-right">
+                @Html.PagedListPager(Model.listaa, Page => Url.Action("Index", new { strona = Page }))
+            </div>
+        </div>
+    </div>
+        <div class="col-md-4">
+            <div class="list-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>Kategorie</h3></div>
+                </div>
+
+                <a href="~/Home/index">
+                    <button type="button" class="list-group-item"><p style="margin:5px; float:left">Wszystkie Kategorie</p><p><span class="glyphicon glyphicon-folder-close" style="float:right" aria-hidden="true"></span></button>
+                </a>
+
+                @foreach (var item in Model.kategoriaa)
+                {
+                    <a href="~/Home/index/@item.IdKategorii">
+                        <button type="button" class="list-group-item"><p style="margin:5px; float:left">@item.NazwaKategorii</p><p><span class="@item.Ikona.NazwaIkony" style="float:right" aria-hidden="true"></span></button>
+                </a>
+                }
+            </div>
+
+        </div>
+</div>
+

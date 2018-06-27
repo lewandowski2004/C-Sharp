@@ -1,0 +1,112 @@
+﻿@model ForumIT.Models.MultidateTematKomentarz
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Temat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.temat.Kategoria.NazwaKategorii)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temat.Kategoria.NazwaKategorii)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.temat.Uzytkownik.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temat.Uzytkownik.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.temat.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temat.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.temat.Tresc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temat.Tresc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.temat.DataDodania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.temat.DataDodania)
+        </dd>
+
+    </dl>
+</div>
+<section>
+    <h4>Komentarze:</h4>
+    @if (Request.IsAuthenticated)
+    {
+        foreach (var item in Model.temat.Komentarze)
+        {
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object img-circle"
+                         src="~/Graphics/Users/@((item.Uzytkownik.Foto!=null)?@item.Uzytkownik.Foto:"user.png")"
+                         alt="@item.Uzytkownik.Imie"
+                         width="64">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">@item.Uzytkownik.PelneNazwisko</h4>
+                    <p>@item.Tresc</p>
+                </div>
+
+            </div>
+            foreach (var item1 in Model.komentarz1.PodKomentarze)
+            {
+                <div class="media">
+                    <div class="media-right" style=" padding: 10px; padding-left: 60px;">
+                        <img class="media-object img-circle"
+                             src="~/Graphics/Users/@((item1.Uzytkownik.Foto!=null)?@item1.Uzytkownik.Foto:"user.png")"
+                             alt="@item1.Uzytkownik.Imie"
+                             width="64">
+                    </div>
+                    <div class="media-body  ">
+                        <h4 class="media-heading">@item1.Uzytkownik.PelneNazwisko</h4>
+                        <p>@item1.Tresc</p>
+                    </div>
+
+                </div>
+
+            }
+            <p>
+                @Html.ActionLink("Dodaj Odpowiedź", "Create", "PodKomentarz", new { id = item.IdKomentarza }, new { @class = "btn btn-success" })
+
+            </p>
+
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            Musisz być zalogowany, aby dodawać komentarze
+        </div>
+    }
+</section>
+
+
+
+<p>
+
+    @Html.ActionLink("Dodaj komentarz", "Create", "Komentarz", new { id = Model.temat.IdTematu }, new { @class = "btn btn-success" })
+</p>
+

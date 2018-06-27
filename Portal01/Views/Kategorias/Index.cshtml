@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ForumIT.Models.Kategoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ikona.NazwaIkony)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NazwaKategorii)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpisKategorii)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ikona.NazwaIkony)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NazwaKategorii)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpisKategorii)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdKategorii }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdKategorii }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdKategorii })
+        </td>
+    </tr>
+}
+
+</table>

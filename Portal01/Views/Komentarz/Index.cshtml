@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ForumIT.Models.Komentarz>
+
+@foreach (var item in Model)
+{
+    <div class="media">
+        <div class="media-left">
+            <img class="media-object img-circle"
+                 src="~/Graphics/Users/@((item.Uzytkownik.Foto!=null)?@item.Uzytkownik.Foto:"user.png")"
+                 alt="@item.Uzytkownik.Imie"
+                 width="64">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">@item.Uzytkownik.PelneNazwisko</h4>
+            <p>@item.Tresc</p>
+        </div>
+
+    </div>
+    foreach (var item1 in Model.)
+    {
+        <div class="media">
+            <div class="media-right" style=" padding: 10px; padding-left: 60px;">
+                <img class="media-object img-circle"
+                     src="~/Graphics/Users/@((item1.Uzytkownik.Foto!=null)?@item1.Uzytkownik.Foto:"user.png")"
+                     alt="@item1.Uzytkownik.Imie"
+                     width="64">
+            </div>
+            <div class="media-body  ">
+                <h4 class="media-heading">@item1.Uzytkownik.PelneNazwisko</h4>
+                <p>@item1.Tresc</p>
+            </div>
+
+        </div>
+
+    }
+    <p>
+        @Html.ActionLink("Dodaj Odpowiedź", "Create", "PodKomentarz", new { id = item.IdKomentarza }, new { @class = "btn btn-success" })
+
+    </p>
+
+}
+    }
+    else
+    {
+<div class="alert alert-warning" role="alert">
+    Musisz być zalogowany, aby dodawać komentarze
+</div>
+    }
+</section>
+
+
+
+<p>
+
+    @Html.ActionLink("Dodaj komentarz", "Create", "Komentarz", new { id = Model.temat.IdTematu }, new { @class = "btn btn-success" })
+</p>

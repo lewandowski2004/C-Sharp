@@ -1,0 +1,42 @@
+﻿@model ForumIT.Models.Kategoria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kategoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ikona.NazwaIkony)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ikona.NazwaIkony)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NazwaKategorii)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NazwaKategorii)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpisKategorii)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpisKategorii)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdKategorii }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
